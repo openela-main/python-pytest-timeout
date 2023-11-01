@@ -1,0 +1,28 @@
+From 787944c580596237b732e227075e9e9e257681a6 Mon Sep 17 00:00:00 2001
+From: Tomas Orsava <torsava@redhat.com>
+Date: Tue, 15 Jun 2021 11:15:19 +0200
+Subject: [PATCH] Remove test-only dependency pexpect
+
+---
+ test_pytest_timeout.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/test_pytest_timeout.py b/test_pytest_timeout.py
+index 16302d7..fe0dd05 100644
+--- a/test_pytest_timeout.py
++++ b/test_pytest_timeout.py
+@@ -3,7 +3,10 @@ import signal
+ import sys
+ import time
+ 
+-import pexpect
++try:
++    import pexpect
++except ImportError:
++    pexpect = None  # does not have spawn :)
+ import pytest
+ 
+ pytest_plugins = "pytester"
+-- 
+2.31.1
+
